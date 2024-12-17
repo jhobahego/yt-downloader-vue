@@ -1,15 +1,14 @@
 import axios from 'axios';
 import type { AudioFormat } from '@/composables/useDownload';
 import { YouTubeSearchResult } from '@/types/youtube';
-
-const API_BASE_URL = 'http://localhost:3001';
+import { API_URL } from '@/config/api';
 
 export const downloadAudioFile = async (
   { id: {videoId}, snippet }: YouTubeSearchResult,
   format: AudioFormat
 ): Promise<void> => {
   try {
-    const response = await axios.get(`${API_BASE_URL}/download/${videoId}/${format}`, {
+    const response = await axios.get(`${API_URL}/download/${videoId}/${format}`, {
       responseType: 'blob'
     });
 
