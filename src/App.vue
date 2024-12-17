@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue';
 import SearchBar from '@/components/SearchBar.vue';
 import VideoList from '@/components/VideoList.vue';
 import ApiKeyModal from '@/components/ApiKeyModal.vue';
@@ -17,7 +16,7 @@ const handleSearch = async (query: string) => {
   await search(query);
 };
 
-const handleApiKeySubmit = async (key: string) => {
+const handleApiKeySubmit = async () => {
   showModal.value = false;
   // Retry the search if there are videos in the list
   if (videos.value.length > 0) {

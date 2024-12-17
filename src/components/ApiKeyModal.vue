@@ -2,13 +2,13 @@
 import { ref } from 'vue';
 import { useYouTubeApiKey } from '@/composables/useYouTubeApiKey';
 
-const props = defineProps<{
+defineProps<{
   show: boolean;
 }>();
 
 const emit = defineEmits<{
   (e: 'close'): void;
-  (e: 'submit', apiKey: string): void;
+  (e: 'submit'): void;
 }>();
 
 const { setApiKey } = useYouTubeApiKey();
@@ -17,8 +17,8 @@ const rememberKey = ref(true);
 
 const handleSubmit = () => {
   if (apiKeyInput.value.trim()) {
-    const key = setApiKey(apiKeyInput.value.trim(), rememberKey.value);
-    emit('submit', key);
+    setApiKey(apiKeyInput.value.trim(), rememberKey.value);
+    emit('submit');
     apiKeyInput.value = '';
   }
 };
