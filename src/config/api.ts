@@ -1,3 +1,3 @@
 export const {
-    API_URL = "http://localhost:3001",
-} = process.env;
+    VITE_API_URL: API_URL = "http://localhost:3001",
+} = import.meta.env;
