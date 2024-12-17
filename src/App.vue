@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 import SearchBar from '@/components/SearchBar.vue';
 import VideoList from '@/components/VideoList.vue';
 import ApiKeyModal from '@/components/ApiKeyModal.vue';
@@ -7,6 +8,7 @@ import { useYouTubeApiKey } from '@/composables/useYouTubeApiKey';
 
 const { videos, loading, error, search } = useYouTubeSearch();
 const { showModal, apiKey } = useYouTubeApiKey();
+const browser = ref('')
 
 const handleSearch = async (query: string) => {
   if (!apiKey.value) {
@@ -14,6 +16,10 @@ const handleSearch = async (query: string) => {
     return;
   }
   await search(query);
+};
+
+const handleSelectedBrowser = (selectedBrowser: string) => {
+  browser.value = selectedBrowser;
 };
 
 const handleApiKeySubmit = async () => {
@@ -29,7 +35,7 @@ const handleApiKeySubmit = async () => {
   <div class="min-h-screen bg-gray-100 py-8 px-4">
     <div class="max-w-4xl mx-auto">
       <h1 class="text-3xl font-bold text-center mb-8">YouTube Video Downloader</h1>
-      <SearchBar @search="handleSearch" />
+      <SearchBar @search="handleSearch" @browser-selected="handleSelectedBrowser" />
       
       <div v-if="loading" class="text-center py-8">
         <p>Loading...</p>
@@ -39,7 +45,7 @@ const handleApiKeySubmit = async () => {
         {{ error.message }}
       </div>
       
-      <VideoList v-else :videos="videos" />
+      <VideoList v-else :videos="videos" :browser="browser" />
     </div>
     
     <ApiKeyModal

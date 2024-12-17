@@ -10,12 +10,13 @@ export function useDownload() {
 
   const downloadAudio = async (
     { id: { videoId }, snippet }: YouTubeSearchResult,
-    format: AudioFormat
+    format: AudioFormat,
+    browser: string | null = null
   ) => {
     try {
       downloading.value = true;
       error.value = null;
-      await downloadAudioFile({ id: { videoId }, snippet}, format);
+      await downloadAudioFile({ id: { videoId }, snippet}, format, browser);
     } catch (e: any) {
       error.value = e.message || 'Download failed';
       console.error('Download error:', e);

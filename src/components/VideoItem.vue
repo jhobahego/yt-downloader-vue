@@ -5,6 +5,7 @@ import { useDownload } from '@/composables/useDownload';
 
 const props = defineProps<{
   video: YouTubeSearchResult;
+  browser: string;
 }>();
 
 const { downloading, error, downloadAudio } = useDownload();
@@ -34,14 +35,14 @@ const truncatedDescription = computed(() => {
       
       <div class="flex gap-2">
         <button
-          @click="downloadAudio(video, 'mp3')"
+          @click="downloadAudio(video, 'mp3', browser)"
           :disabled="downloading"
           class="px-4 py-1 bg-green-500 text-white rounded hover:bg-green-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {{ downloading ? 'Downloading...' : 'Download MP3' }}
         </button>
         <button
-          @click="downloadAudio(video, 'wav')"
+          @click="downloadAudio(video, 'wav', browser)"
           :disabled="downloading"
           class="px-4 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         >

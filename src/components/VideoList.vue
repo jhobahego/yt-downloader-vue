@@ -4,6 +4,7 @@ import VideoItem from './VideoItem.vue';
 
 defineProps<{
   videos: YouTubeSearchResult[];
+  browser: string;
 }>();
 </script>
 
@@ -13,6 +14,7 @@ defineProps<{
       v-for="video in videos"
       :key="video.id.videoId"
       :video="video"
+      :browser="browser"
     />
   </div>
 </template>
