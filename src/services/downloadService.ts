@@ -5,11 +5,10 @@ import { API_URL } from '@/config/api';
 
 export const downloadAudioFile = async (
   { id: {videoId}, snippet }: YouTubeSearchResult,
-  format: AudioFormat,
-  browser: string | null = null
+  format: AudioFormat
 ): Promise<void> => {
   try {
-    const response = await axios.get(`${API_URL}/download/${videoId}/${format}?browser=${browser}`, {
+    const response = await axios.get(`${API_URL}/download/${videoId}/${format}`, {
       responseType: 'blob'
     });
 
